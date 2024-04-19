@@ -24,7 +24,9 @@ class MyApp extends StatelessWidget {
             debugPrint('Error: Something Went Wrong ${snapshot.error}');
           }
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
           }
           return MaterialApp(
             debugShowCheckedModeBanner: false,

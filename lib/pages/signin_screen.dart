@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:home_service_flutter_app/pages/home.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:home_service_flutter_app/pages/start.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -74,7 +75,7 @@ class _SignInScreenState extends State<SignInScreen> {
       Navigator.pushAndRemoveUntil(
         context,
         PageRouteBuilder(
-          pageBuilder: (context, _, __) => const HomePage(),
+          pageBuilder: (context, _, __) => const StartPage(),
         ),
         (route) => false,
       );

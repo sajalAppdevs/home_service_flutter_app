@@ -43,113 +43,120 @@ class StartPageState extends State<StartPage> {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Scaffold(
-      body: Column(
-        children: [
-          const SizedBox(
-            height: 100,
-          ),
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 50),
-            height: MediaQuery.of(context).size.height * 0.45,
-            width: MediaQuery.of(context).size.width,
-            child: GridView.builder(
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 3,
-                childAspectRatio: 1.0,
-                crossAxisSpacing: 8.0,
-                mainAxisSpacing: 8.0,
+      body: SingleChildScrollView(
+        child: SizedBox(
+          width: double.infinity,
+          height: size.height,
+          child: Column(
+            children: [
+              const SizedBox(
+                height: 100,
               ),
-              physics: const NeverScrollableScrollPhysics(),
-              itemCount: services.length,
-              itemBuilder: (BuildContext context, int index) {
-                return FadeAnimation(
-                  (1.0 + index) / 4,
-                  serviceContainer(
-                      services[index].imageURL, services[index].name, index),
-                );
-              },
-            ),
-          ),
-          Expanded(
-            child: Container(
-              decoration: const BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(80),
-                    topRight: Radius.circular(80),
-                  )),
-              child: Column(
-                children: [
-                  const SizedBox(height: 50),
-                  FadeAnimation(
-                      1.5,
-                      Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 40),
-                        child: Center(
-                          child: Text(
-                            'Easy, reliable way to take \ncare of your home',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontSize: 24,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.grey.shade900,
-                            ),
-                          ),
-                        ),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 50),
+                height: size.height * 0.45,
+                width: size.width,
+                child: GridView.builder(
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 3,
+                    childAspectRatio: 1.0,
+                    crossAxisSpacing: 8.0,
+                    mainAxisSpacing: 8.0,
+                  ),
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemCount: services.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return FadeAnimation(
+                      (1.0 + index) / 4,
+                      serviceContainer(
+                          services[index].imageURL, services[index].name, index),
+                    );
+                  },
+                ),
+              ),
+              Expanded(
+                child: Container(
+                  decoration: const BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(80),
+                        topRight: Radius.circular(80),
                       )),
-                  const SizedBox(height: 20),
-                  FadeAnimation(
-                    1.5,
-                    Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 60),
-                      child: Center(
-                        child: Text(
-                          'We provide you with the best people to help take care of your home.',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: 16,
-                            color: Colors.grey.shade600,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  FadeAnimation(
-                    1.5,
-                    Padding(
-                      padding: const EdgeInsets.all(50.0),
-                      child: GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const HomePage(),
+                  child: Column(
+                    children: [
+                      const SizedBox(height: 50),
+                      FadeAnimation(
+                          1.5,
+                          Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 40),
+                            child: Center(
+                              child: Text(
+                                'Easy, reliable way to take \ncare of your home',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  fontSize: 24,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.grey.shade900,
+                                ),
+                              ),
                             ),
-                          );
-                        },
-                        child: Container(
-                          height: 50,
-                          decoration: BoxDecoration(
-                            color: Colors.blue,
-                            borderRadius: BorderRadius.circular(15.0),
-                          ),
-                          child: const Center(
+                          )),
+                      const SizedBox(height: 20),
+                      FadeAnimation(
+                        1.5,
+                        Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 60),
+                          child: Center(
                             child: Text(
-                              'Get Started',
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 20),
+                              'We provide you with the best people to help take care of your home.',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontSize: 16,
+                                color: Colors.grey.shade600,
+                              ),
                             ),
                           ),
                         ),
                       ),
-                    ),
+                      FadeAnimation(
+                        1.5,
+                        Padding(
+                          padding: const EdgeInsets.all(50.0),
+                          child: GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const HomePage(),
+                                ),
+                              );
+                            },
+                            child: Container(
+                              height: 50,
+                              decoration: BoxDecoration(
+                                color: Colors.blue,
+                                borderRadius: BorderRadius.circular(15.0),
+                              ),
+                              child: const Center(
+                                child: Text(
+                                  'Get Started',
+                                  style:
+                                      TextStyle(color: Colors.white, fontSize: 20),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
-                ],
-              ),
-            ),
-          )
-        ],
+                ),
+              )
+            ],
+          ),
+        ),
       ),
     );
   }
