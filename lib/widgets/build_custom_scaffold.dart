@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:home_service_flutter_app/animation/FadeAnimation.dart';
 import '../gen/assets.gen.dart';
 
 class BuildCustomScaffold extends StatelessWidget {
@@ -16,11 +17,13 @@ class BuildCustomScaffold extends StatelessWidget {
         extendBodyBehindAppBar: true,
         body: Stack(
           children: [
-            Image.asset(
-              Assets.images.background.keyName,
-              fit: BoxFit.cover,
-              width: double.infinity,
-              height: double.infinity,
+            FadeAnimation(
+              0.3, Image.asset(
+                Assets.images.background.keyName,
+                fit: BoxFit.cover,
+                width: double.infinity,
+                height: double.infinity,
+              ),
             ),
             child,
           ],

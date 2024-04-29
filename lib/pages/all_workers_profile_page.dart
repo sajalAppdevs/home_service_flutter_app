@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:home_service_flutter_app/pages/worker_profile.dart';
+import 'package:home_service_flutter_app/widgets/worker_profile.dart';
 
 import '../animation/FadeAnimation.dart';
 
-class AllProfiles extends StatefulWidget {
-  const AllProfiles({super.key});
+class AllWorkersProfilesPage extends StatefulWidget {
+  const AllWorkersProfilesPage({super.key});
 
   @override
-  State<AllProfiles> createState() => _AllProfilesState();
+  State<AllWorkersProfilesPage> createState() => _AllWorkersProfilesPageState();
 }
 
-class _AllProfilesState extends State<AllProfiles> {
+class _AllWorkersProfilesPageState extends State<AllWorkersProfilesPage> {
   List<dynamic> workers = [
     [
       'Isabel Kirkland',
@@ -84,7 +84,7 @@ class _AllProfilesState extends State<AllProfiles> {
         itemBuilder: (context, index) => GestureDetector(
           onTap: () => Navigator.of(context).push(
             MaterialPageRoute(
-              builder: (context) => WorkerProfile(
+              builder: (context) => WorkerProfileWidget(
                 name: workers[index][0],
                 service: workers[index][1],
                 image: workers[index][2],

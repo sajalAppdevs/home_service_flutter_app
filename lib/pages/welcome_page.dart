@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:home_service_flutter_app/animation/FadeAnimation.dart';
 
 import '../widgets/build_custom_scaffold.dart';
 import '../widgets/build_welcome_button.dart';
-import 'signin_screen.dart';
-import 'signup_screen.dart';
+import 'signin_page.dart';
+import 'signup_page.dart';
 
-class WelcomeScreen extends StatelessWidget {
-  const WelcomeScreen({super.key});
+class WelcomePage extends StatelessWidget {
+  const WelcomePage({super.key});
 
   @override
   Widget build(BuildContext context) => BuildCustomScaffold(
@@ -42,27 +43,30 @@ class WelcomeScreen extends StatelessWidget {
             ),
             const Flexible(
               flex: 2,
-              child: Align(
-                alignment: Alignment.bottomRight,
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: BuildWelcomeButton(
-                        buttonText: 'Sign in',
-                        onTap: SignInScreen(),
-                        color: Colors.transparent,
-                        textColor: Colors.white,
+              child: FadeAnimation(
+                1,
+                Align(
+                  alignment: Alignment.bottomRight,
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: BuildWelcomeButton(
+                          buttonText: 'Sign in',
+                          onTap: SignInPage(),
+                          color: Colors.transparent,
+                          textColor: Colors.white,
+                        ),
                       ),
-                    ),
-                    Expanded(
-                      child: BuildWelcomeButton(
-                        buttonText: 'Sign up',
-                        onTap: SignUpScreen(),
-                        color: Colors.white,
-                        textColor: Colors.blue,
+                      Expanded(
+                        child: BuildWelcomeButton(
+                          buttonText: 'Sign up',
+                          onTap: SignUpPage(),
+                          color: Colors.white,
+                          textColor: Colors.blue,
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ),

@@ -1,8 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:home_service_flutter_app/pages/all_profiles.dart';
-import 'package:home_service_flutter_app/pages/signin_screen.dart';
-import 'package:home_service_flutter_app/pages/start.dart';
+import 'package:home_service_flutter_app/pages/all_workers_profile_page.dart';
+import 'package:home_service_flutter_app/pages/worker_profile_page.dart';
+import 'package:home_service_flutter_app/pages/signin_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../animation/FadeAnimation.dart';
@@ -50,6 +50,9 @@ class HomePageState extends State<HomePage> {
     ]
   ];
 
+  static const userProfile =
+      'https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=3387&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -85,7 +88,7 @@ class HomePageState extends State<HomePage> {
                 Navigator.pushAndRemoveUntil(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const SignInScreen(),
+                    builder: (context) => const SignInPage(),
                   ),
                   (route) => false,
                 );
@@ -94,12 +97,20 @@ class HomePageState extends State<HomePage> {
           ),
         ],
         leading: GestureDetector(
-          onTap: () {},
+          onTap: () {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => const WorkerProfilePage(userProfile),
+              ),
+            );
+          },
           child: const Padding(
             padding: EdgeInsets.all(10.0),
-            child: CircleAvatar(
-              backgroundImage: NetworkImage(
-                  'https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=3387&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'),
+            child: Hero(
+              tag: 'userProfile',
+              child: CircleAvatar(
+                backgroundImage: NetworkImage(userProfile),
+              ),
             ),
           ),
         ),
@@ -124,7 +135,7 @@ class HomePageState extends State<HomePage> {
                       onPressed: () {
                         Navigator.of(context).push(
                           MaterialPageRoute(
-                            builder: (context) => const AllProfiles(),
+                            builder: (context) => const AllWorkersProfilesPage(),
                           ),
                         );
                       },
@@ -137,88 +148,88 @@ class HomePageState extends State<HomePage> {
               ),
             ),
             FadeAnimation(
-                1.2,
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                  child: Container(
-                    padding: const EdgeInsets.all(20.0),
-                    height: 180,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(20.0),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.shade200,
-                          offset: const Offset(0, 4),
-                          blurRadius: 10.0,
-                        ),
-                      ],
-                    ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            ClipRRect(
-                              borderRadius: BorderRadius.circular(15.0),
-                              child: Image.network(
-                                'https://images.pexels.com/photos/355164/pexels-photo-355164.jpeg?crop=faces&fit=crop&h=200&w=200&auto=compress&cs=tinysrgb',
-                                width: 70,
-                              ),
-                            ),
-                            const SizedBox(
-                              width: 15,
-                            ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const Text(
-                                  "Isabel Kirkland",
-                                  style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                                const SizedBox(
-                                  height: 5,
-                                ),
-                                Text(
-                                  "Cleaner",
-                                  style: TextStyle(
-                                      color: Colors.black.withOpacity(0.7),
-                                      fontSize: 18),
-                                ),
-                              ],
-                            )
-                          ],
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        GestureDetector(
-                          onTap: () => Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (context) => const AllProfiles(),
-                            ),
-                          ),
-                          child: Container(
-                            height: 50,
-                            decoration: BoxDecoration(
-                                color: Colors.blue,
-                                borderRadius: BorderRadius.circular(15.0)),
-                            child: const Center(
-                                child: Text(
-                              'View Profile',
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 18),
-                            )),
-                          ),
-                        )
-                      ],
-                    ),
+              1.2,
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                child: Container(
+                  padding: const EdgeInsets.all(20.0),
+                  height: 180,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(20.0),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.shade200,
+                        offset: const Offset(0, 4),
+                        blurRadius: 10.0,
+                      ),
+                    ],
                   ),
-                )),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(15.0),
+                            child: Image.network(
+                              'https://images.pexels.com/photos/355164/pexels-photo-355164.jpeg?crop=faces&fit=crop&h=200&w=200&auto=compress&cs=tinysrgb',
+                              width: 70,
+                            ),
+                          ),
+                          const SizedBox(
+                            width: 15,
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Text(
+                                "Isabel Kirkland",
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              const SizedBox(
+                                height: 5,
+                              ),
+                              Text(
+                                "Cleaner",
+                                style: TextStyle(
+                                    color: Colors.black.withOpacity(0.7),
+                                    fontSize: 18),
+                              ),
+                            ],
+                          )
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      GestureDetector(
+                        onTap: () => Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => const AllWorkersProfilesPage(),
+                          ),
+                        ),
+                        child: Container(
+                          height: 50,
+                          decoration: BoxDecoration(
+                              color: Colors.blue,
+                              borderRadius: BorderRadius.circular(15.0)),
+                          child: const Center(
+                              child: Text(
+                            'View Profile',
+                            style: TextStyle(color: Colors.white, fontSize: 18),
+                          )),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+            ),
             const SizedBox(
               height: 20,
             ),
@@ -238,7 +249,7 @@ class HomePageState extends State<HomePage> {
                       onPressed: () {
                         Navigator.of(context).push(
                           MaterialPageRoute(
-                            builder: (context) => const StartPage(),
+                            builder: (context) => const AllWorkersProfilesPage(),
                           ),
                         );
                       },
@@ -262,11 +273,24 @@ class HomePageState extends State<HomePage> {
                 ),
                 physics: const NeverScrollableScrollPhysics(),
                 itemCount: services.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return FadeAnimation(
-                    (1.0 + index) / 4,
-                    serviceContainer(
-                        services[index].imageURL, services[index].name, index),
+                itemBuilder: (context, index) {
+                  return GestureDetector(
+                    onTap: () {
+                      debugPrint('open category$index');
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => const AllWorkersProfilesPage(),
+                        ),
+                      );
+                    },
+                    child: FadeAnimation(
+                      (1.0 + index) / 4,
+                      serviceContainer(
+                        services[index].imageURL,
+                        services[index].name,
+                        index,
+                      ),
+                    ),
                   );
                 },
               ),
@@ -288,7 +312,7 @@ class HomePageState extends State<HomePage> {
                       onPressed: () {
                         Navigator.of(context).push(
                           MaterialPageRoute(
-                            builder: (context) => const AllProfiles(),
+                            builder: (context) => const AllWorkersProfilesPage(),
                           ),
                         );
                       },
@@ -340,17 +364,18 @@ class HomePageState extends State<HomePage> {
           borderRadius: BorderRadius.circular(20.0),
         ),
         child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Image.asset(image, height: 45),
-              const SizedBox(
-                height: 20,
-              ),
-              Text(
-                name,
-                style: const TextStyle(fontSize: 15),
-              )
-            ]),
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset(image, height: 45),
+            const SizedBox(
+              height: 20,
+            ),
+            Text(
+              name,
+              style: const TextStyle(fontSize: 15),
+            )
+          ],
+        ),
       ),
     );
   }
@@ -371,53 +396,51 @@ class HomePageState extends State<HomePage> {
             borderRadius: BorderRadius.circular(20.0),
           ),
           child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                ClipRRect(
-                    borderRadius: BorderRadius.circular(15.0),
-                    child: Image.network(image)),
-                const SizedBox(
-                  width: 20,
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      name,
-                      style: const TextStyle(
-                          fontSize: 16, fontWeight: FontWeight.bold),
-                    ),
-                    const SizedBox(
-                      height: 5,
-                    ),
-                    Text(
-                      job,
-                      style: const TextStyle(fontSize: 15),
-                    )
-                  ],
-                ),
-                const Spacer(),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      rating.toString(),
-                      style: const TextStyle(
-                          fontSize: 16, fontWeight: FontWeight.bold),
-                    ),
-                    const SizedBox(
-                      height: 5,
-                    ),
-                    const Icon(
-                      Icons.star,
-                      color: Colors.orange,
-                      size: 20,
-                    )
-                  ],
-                )
-              ]),
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              ClipRRect(
+                borderRadius: BorderRadius.circular(15.0),
+                child: Image.network(image),
+              ),
+              const SizedBox(width: 20),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    name,
+                    style: const TextStyle(
+                        fontSize: 16, fontWeight: FontWeight.bold),
+                  ),
+                  const SizedBox(height: 5),
+                  Text(
+                    job,
+                    style: const TextStyle(fontSize: 15),
+                  )
+                ],
+              ),
+              const Spacer(),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    rating.toString(),
+                    style: const TextStyle(
+                        fontSize: 16, fontWeight: FontWeight.bold),
+                  ),
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  const Icon(
+                    Icons.star,
+                    color: Colors.orange,
+                    size: 20,
+                  )
+                ],
+              )
+            ],
+          ),
         ),
       ),
     );

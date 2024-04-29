@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:home_service_flutter_app/pages/start.dart';
+import 'package:home_service_flutter_app/pages/home_page.dart';
+import 'package:home_service_flutter_app/pages/start_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../pages/welcome_screen.dart';
+import '../pages/welcome_page.dart';
 
 class CheckStatus extends StatelessWidget {
   const CheckStatus({super.key});
@@ -23,9 +24,9 @@ class CheckStatus extends StatelessWidget {
               child: CircularProgressIndicator(),
             );
           } else if (snapshot.data == false) {
-            return const WelcomeScreen();
+            return const WelcomePage();
           }
-          return const StartPage();
+          return const HomePage();
         },
       );
 }

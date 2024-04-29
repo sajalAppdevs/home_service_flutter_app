@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:home_service_flutter_app/pages/home.dart';
+import 'package:home_service_flutter_app/pages/home_page.dart';
 
 import '../gen/assets.gen.dart';
 import '../animation/FadeAnimation.dart';
@@ -29,16 +29,27 @@ class StartPageState extends State<StartPage> {
   ];
 
   int selectedService = 4;
+  late Timer timer;
 
   @override
   void initState() {
-    Timer.periodic(const Duration(seconds: 2), (timer) {
-      setState(() {
-        selectedService = Random().nextInt(services.length);
-      });
-    });
-
     super.initState();
+    if (mounted) {
+      timer = Timer.periodic(
+        const Duration(seconds: 2),
+        (timer) {
+          setState(
+            () => selectedService = Random().nextInt(services.length),
+          );
+        },
+      );
+    }
+  }
+
+  @override
+  void dispose() {
+    timer.cancel();
+    super.dispose();
   }
 
   @override
@@ -70,8 +81,8 @@ class StartPageState extends State<StartPage> {
                   itemBuilder: (BuildContext context, int index) {
                     return FadeAnimation(
                       (1.0 + index) / 4,
-                      serviceContainer(
-                          services[index].imageURL, services[index].name, index),
+                      serviceContainer(services[index].imageURL,
+                          services[index].name, index),
                     );
                   },
                 ),
@@ -142,8 +153,8 @@ class StartPageState extends State<StartPage> {
                               child: const Center(
                                 child: Text(
                                   'Get Started',
-                                  style:
-                                      TextStyle(color: Colors.white, fontSize: 20),
+                                  style: TextStyle(
+                                      color: Colors.white, fontSize: 20),
                                 ),
                               ),
                             ),

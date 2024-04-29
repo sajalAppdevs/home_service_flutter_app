@@ -3,8 +3,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class WorkerProfile extends StatefulWidget {
-  const WorkerProfile({
+class WorkerProfileWidget extends StatefulWidget {
+  const WorkerProfileWidget({
     super.key,
     required this.name,
     required this.service,
@@ -18,10 +18,10 @@ class WorkerProfile extends StatefulWidget {
   final String phone;
 
   @override
-  State<WorkerProfile> createState() => _WorkerProfileState();
+  State<WorkerProfileWidget> createState() => _WorkerProfileWidgetState();
 }
 
-class _WorkerProfileState extends State<WorkerProfile> {
+class _WorkerProfileWidgetState extends State<WorkerProfileWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
